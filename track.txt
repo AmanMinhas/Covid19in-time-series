@@ -1,0 +1,7 @@
+- Import Time Series API 
+  https://api.rootnet.in/covid19-in/stats/history
+  https://api.rootnet.in/covid19-in/unofficial/covid19india.org/statewise/history
+- Integrate ReCharts
+- Integrate India State Topology API
+  https://github.com/deldersveld/topojson/blob/master/countries/india/india-states.json
+
