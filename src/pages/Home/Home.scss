@@ -1,0 +1,17 @@
+.p-Home {
+  &__multiselect-container {
+    padding: 8px 16px;
+    
+    .optionListContainer {
+      max-width: 375px;
+    }
+
+    input {
+      font-size: 16px;
+    }
+  }
+
+  .c-TopFive {
+    padding: 8px 16px;
+  }
+}
