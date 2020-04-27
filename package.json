@@ -9,6 +9,8 @@
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.2",
     "@types/react-dom": "^16.9.6",
+    "multiselect-react-dropdown": "^1.4.8",
+    "node-sass": "^4.14.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
