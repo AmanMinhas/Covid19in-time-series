@@ -1,0 +1,14 @@
+@import "../../styles/all.scss";
+
+.c-Navbar {
+  background-color: $primary-color;
+
+  p {
+    @include fontBase(16px, $font-regular, white);
+
+    margin: 0;
+    text-align: center;
+  }
+
+  padding: 12px 8px;
+}
