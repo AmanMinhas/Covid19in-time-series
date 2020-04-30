@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { LineChart, CartesianGrid, XAxis, YAxis, Legend, Tooltip, Line, ResponsiveContainer } from 'recharts';
+import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ResponsiveContainer } from 'recharts';
 import { IStats, ISelectedState, IDayData, IRegion } from '../../pages/Home/Home';
-// import { selectedStates } from './selectedStates';
 import './PlotLineChart.scss';
 
 interface PlotLineChartProps {
-  statesData: IStats;
+  stats: IStats;
   selectedStates: ISelectedState[];
 }
 
 const PlotLineChart = (props: PlotLineChartProps) => {
-  const { statesData, selectedStates } = props;
+  const { stats, selectedStates } = props;
   const [lineData, setLineData] = useState<any>([]);
   const className = 'c-PlotLineChart';
 
   useEffect(() => {
-    if (statesData) {
-      const { data } = statesData;
+    if (stats) {
+      const { data } = stats;
 
       const formattedLineData = data.map((dayData: IDayData) => {
         const { day, summary, regional } = dayData;
@@ -31,12 +30,14 @@ const PlotLineChart = (props: PlotLineChartProps) => {
             includeCountryData = true;
             return;
           }
-          const details = regional.find((region: IRegion) => region.loc === state.name) || { totalConfirmed: 0, discharged: 0 };
-          const { totalConfirmed, discharged } = details;
-          statesData = {
-            ...statesData,
-            [state.dataKey]: totalConfirmed - discharged
-          };
+          const details = regional.find((region: IRegion) => region.loc === state.name);
+          if (details) {
+            const { totalConfirmed, discharged, deaths } = details;
+            statesData = {
+              ...statesData,
+              [state.dataKey]: totalConfirmed - discharged - deaths
+            };
+          }
         })
 
         const countryData = includeCountryData ? {
@@ -52,7 +53,7 @@ const PlotLineChart = (props: PlotLineChartProps) => {
 
       setLineData(formattedLineData);
     }
-  }, [statesData, selectedStates])
+  }, [stats, selectedStates])
 
   if (!lineData.length) return null;
   return (
@@ -64,7 +65,6 @@ const PlotLineChart = (props: PlotLineChartProps) => {
           <XAxis dataKey="day" />
           <YAxis />
           <Tooltip />
-          <Legend />
           {selectedStates.map((stateData) => {
             const { dataKey, color } = stateData;
             return (

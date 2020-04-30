@@ -1,0 +1,11 @@
+@import '../../styles/all.scss';
+
+.c-App {
+  background-color: $primary-color;
+  min-height: 100vh;
+
+  &__inner {
+    max-width: 786px;
+    margin: 0 auto;
+  }
+}

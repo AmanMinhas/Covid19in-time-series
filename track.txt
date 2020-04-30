@@ -3,7 +3,7 @@
   https://api.rootnet.in/covid19-in/unofficial/covid19india.org/statewise/history
 - Setup State Selection
 - Setup Banner
-- Setup State Card
+- Setup Region Card
 - Render Top 5
 - Setup StateToColorMap
 - Integrate India State Topology API

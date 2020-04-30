@@ -1,0 +1,73 @@
+@import '../../styles/all.scss';
+
+$regionCardWidth: 200px;
+$regionCardPaddingLeft: 8px;
+$regionCardPaddingRight: 40px;
+$regionCardTextContentArea: $regionCardWidth - $regionCardPaddingLeft - $regionCardPaddingRight;
+
+.c-RegionCard {
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: #201c29;
+
+  &__header-row {
+    @include fontBase(12px, $font-regular, white);
+
+    padding: 8px;
+    border-bottom: 1px solid white;
+
+    p {
+      margin: 0;
+      display: inline;
+    }
+
+    button {
+      @include fontBase(8px, $font-regular, white);
+
+      background: cornflowerblue;
+      border: none;
+      cursor: pointer;
+      float: right;
+      font-family: "Roboto";
+      padding: 3px 8px 2px;
+      outline: none;
+    }
+  }
+
+  &__data-container {
+    color: white;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__box {
+    display: block;
+    padding: 4px 0;
+    text-align: center;
+  }
+
+  &__box-label {
+    font-size: 8px;
+  }
+  
+  &__box-count-value {
+    font-size: 12px;
+    margin-top: 4px;
+
+    &--total-cases {
+      color: $total-case-count-color;
+    }
+  
+    &--active-cases {
+      color: $active-case-count-color;
+    }
+  
+    &--recovered {
+      color: $recovered-count-color;
+    }
+  
+    &--diseased {
+      color: $diseased-count-color;
+    }
+  }
+}
