@@ -1,0 +1,19 @@
+.c-Dashboard {
+  &__sub-box-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    .c-DashboardDataBox {
+      flex-basis: 30%;
+
+      &__title {
+        font-size: 10px;
+      }
+
+      &__count {
+        font-size: 14px;
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+@import '../../../styles/all.scss';
+
+.c-DashboardDataBox {
+  background-color: #201c29;
+  border-radius: 5px;
+  font-family: $font-regular;
+  color: white;
+
+  &__title {
+    font-size: 12px;
+    padding: 8px;
+  }
+  
+  &__count {
+    font-size: 18px;
+    text-align: right;
+    padding: 8px;
+
+    &--total-cases {
+      color: $total-case-count-color;
+    }
+  
+    &--active-cases {
+      color: $active-case-count-color;
+    }
+  
+    &--recovered {
+      color: $recovered-count-color;
+    }
+  
+    &--diseased {
+      color: $diseased-count-color;
+    }
+  }
+}
