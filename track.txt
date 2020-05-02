@@ -4,7 +4,7 @@
 - Setup State Selection
 - Setup Banner
 - Setup Region Card
-- Render Top 5
+- Setup Selected Region Context
 - Setup StateToColorMap
 - Integrate India State Topology API
   https://github.com/deldersveld/topojson/blob/master/countries/india/india-states.json

@@ -1467,6 +1467,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-scroll@^1.5.4":
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/@types/react-scroll/-/react-scroll-1.5.4.tgz#c151b8e5320ba90dbb0adfbdfaa0823d57571746"
+  integrity sha512-EYJt9wDvyrcDZpZqI19eb2UlAzCoXBeoFu3yMkrBDC8zkwFXOhb8lv3tD9V9UAqptora096M7qWYktsWq1guEg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-simple-maps@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/react-simple-maps/-/react-simple-maps-1.0.2.tgz#2f4a13b383571fcd531dd24612a5f7a7bdfa7838"
@@ -8809,7 +8816,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.4"
 
-prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -9104,6 +9111,14 @@ react-scripts@3.4.1:
     workbox-webpack-plugin "4.3.1"
   optionalDependencies:
     fsevents "2.1.2"
+
+react-scroll@^1.7.16:
+  version "1.7.16"
+  resolved "https://registry.yarnpkg.com/react-scroll/-/react-scroll-1.7.16.tgz#814f0b97ed171aad1f27e45dad16a8444817fec8"
+  integrity sha512-f4M5AdL+3cw3MJ7c/T0hPMY2iHCeQLDXV13lRanAFQ6JIt9xyAdHCpTH9mLUQt9SQh4pRarD+Qc7KhU6qMx3Yg==
+  dependencies:
+    lodash.throttle "^4.1.1"
+    prop-types "^15.5.8"
 
 react-simple-maps@^2.0.0:
   version "2.0.0"

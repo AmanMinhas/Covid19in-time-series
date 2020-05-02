@@ -1,7 +1,7 @@
 @import "../../styles/all.scss";
 
 .c-Navbar {
-  background-color: $primary-color;
+  background-color: $primary-button-color;
 
   p {
     @include fontBase(16px, $font-regular, white);
