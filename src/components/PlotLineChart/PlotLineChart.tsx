@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ResponsiveContainer } from 'recharts';
-import { IStats, ISelectedState, IDayData, IRegion } from '../../pages/Home/Home';
+import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, Legend, ResponsiveContainer } from 'recharts';
+import { IStats, IDayData, IRegion } from '../../pages/Home/Home';
 import './PlotLineChart.scss';
+import { IRegionPlotMetaData } from '../../context/Global/Global';
 
 interface PlotLineChartProps {
   stats: IStats;
-  selectedStates: ISelectedState[];
+  selectedStates: IRegionPlotMetaData[];
 }
 
 const PlotLineChart = (props: PlotLineChartProps) => {
@@ -25,7 +26,7 @@ const PlotLineChart = (props: PlotLineChartProps) => {
 
         let includeCountryData = false;
         let statesData = {};
-        selectedStates.forEach((state: ISelectedState) => {
+        selectedStates.forEach((state: IRegionPlotMetaData) => {
           if (state.name === 'India') {
             includeCountryData = true;
             return;
@@ -53,24 +54,30 @@ const PlotLineChart = (props: PlotLineChartProps) => {
 
       setLineData(formattedLineData);
     }
-  }, [stats, selectedStates])
+  }, [stats, selectedStates]);
 
   if (!lineData.length) return null;
+
   return (
     <div className={className}>
-      <ResponsiveContainer width='100%' height={250}>
-        <LineChart width={730} height={250} data={lineData}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" />
-          <YAxis />
+      <p className={`${className}__title`}>Active Cases Time Series</p>
+      <ResponsiveContainer
+        height={250}
+      >
+        <LineChart
+          data={lineData}
+        >
+          <CartesianGrid strokeDasharray='3 3' />
+          <XAxis dataKey='day' />
+          <YAxis width={40} />
           <Tooltip />
-          {selectedStates.map((stateData) => {
+          <Legend iconType='circle' wrapperStyle={{ bottom: 0, left: 15 }} />
+          {selectedStates.map((stateData: IRegionPlotMetaData, key: number) => {
             const { dataKey, color } = stateData;
             return (
               <Line
-                key={dataKey}
-                type="monotone"
+                key={key}
+                type='monotone'
                 dataKey={dataKey}
                 stroke={color}
                 dot={false}

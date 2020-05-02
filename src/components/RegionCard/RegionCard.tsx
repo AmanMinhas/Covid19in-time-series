@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { IRegion } from '../../pages/Home/Home';
 import { CaseTypes } from '../TopCases/TopCases';
+import { GlobalContext } from '../../context/Global';
 import './RegionCard.scss';
+import { IRegionPlotMetaData } from '../../context/Global/Global';
 
 interface Props {
   region: IRegion;
@@ -14,7 +16,34 @@ interface ILabelValMap {
 }
 
 const RegionCard = ({ region }: Props) => {
+  const {
+    selectedRegionsMetadata,
+    addRegionMetadata,
+    removeRegionMetadata
+  } = useContext(GlobalContext);
+
+  if (
+    !selectedRegionsMetadata ||
+    !addRegionMetadata ||
+    !removeRegionMetadata
+  ) return null;
+
+  const { loc } = region;
   const className = 'c-RegionCard';
+
+  const isSelected = !!selectedRegionsMetadata.find(
+    (regionMetadata: IRegionPlotMetaData) => loc === regionMetadata.name
+  );
+
+  const handleActionButtonClick = () => {
+    if (!isSelected) {
+      addRegionMetadata(loc);
+    } else {
+      removeRegionMetadata(loc);
+    }
+  }
+
+  const buttonLabel = isSelected ? 'Remove from Graph' : 'Plot on Graph';
 
   const renderHeader = () => {
     const { loc } = region;
@@ -26,8 +55,8 @@ const RegionCard = ({ region }: Props) => {
         style={bgColorStyle}
       >
         <p>{loc}</p>
-        <button>
-          Plot on Graph
+        <button onClick={() => handleActionButtonClick()}>
+          {buttonLabel}
         </button>
       </div>
     )

@@ -24,13 +24,15 @@ $regionCardTextContentArea: $regionCardWidth - $regionCardPaddingLeft - $regionC
     button {
       @include fontBase(8px, $font-regular, white);
 
-      background: cornflowerblue;
+      background: $primary-button-color;
       border: none;
+      border-radius: 5px;
       cursor: pointer;
       float: right;
       font-family: "Roboto";
       padding: 3px 8px 2px;
       outline: none;
+      text-transform: uppercase;
     }
   }
 

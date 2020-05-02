@@ -1,5 +1,30 @@
+@import '../../styles/all.scss';
+
 .c-PlotLineChart {
-  tspan {
-    font-size: 10px;
+  padding: 16px 8px;
+
+  &__title {
+    @include fontBase(16px, $font-regular, black);
+
+    margin: 0;
+    margin-bottom: 8px;
+    text-align: center;
   }
+
+  .recharts-responsive-container {
+    tspan {
+      font-size: 10px;
+    }
+    
+    .recharts-legend-wrapper > ul {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .recharts-legend-item-text {
+      font-size: 10px;
+    }
+  }
+
+
 }
