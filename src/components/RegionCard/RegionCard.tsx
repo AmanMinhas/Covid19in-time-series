@@ -2,8 +2,10 @@ import React, { useContext } from 'react'
 import { IRegion } from '../../pages/Home/Home';
 import { CaseTypes } from '../TopCases/TopCases';
 import { GlobalContext } from '../../context/Global';
-import './RegionCard.scss';
 import { IRegionPlotMetaData } from '../../context/Global/Global';
+import ReactGA from 'react-ga';
+import './RegionCard.scss';
+
 
 interface Props {
   region: IRegion;
@@ -38,8 +40,18 @@ const RegionCard = ({ region }: Props) => {
   const handleActionButtonClick = () => {
     if (!isSelected) {
       addRegionMetadata(loc);
+      ReactGA.event({
+        category: 'Plot on Graph',
+        action: 'User clicked Plot on Graph',
+        label: loc
+      });
     } else {
       removeRegionMetadata(loc);
+      ReactGA.event({
+        category: 'Remove from Graph',
+        action: 'User clicked Remove from Graph',
+        label: loc
+      });
     }
   }
 
