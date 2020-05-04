@@ -1,5 +1,6 @@
-import React, { useState, ReactNode } from 'react';
-import { IRegion } from '../../pages/Home/Home';
+import React, { useState, useEffect, ReactNode } from 'react';
+import ReactGA from 'react-ga';
+// import { IRegion } from '../../pages/Home/Home';
 import { getUniqueColor } from '../../utils/color';
 
 interface Props {
@@ -56,6 +57,14 @@ const Global = ({ children }: Props) => {
     addRegionMetadata,
     removeRegionMetadata
   }
+
+  useEffect(() => {
+    const gaTrackingId = process.env.REACT_APP_GA_TRACKING_ID;
+    if (gaTrackingId) {
+      ReactGA.initialize(gaTrackingId);
+      ReactGA.pageview(window.location.pathname + window.location.search);
+    }
+  }, []);
 
   return (
     <GlobalContext.Provider value={value}>
