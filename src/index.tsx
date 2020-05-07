@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import Global from './context/Global';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+// import i18n from './i18n';
+import './i18n';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Global>
-      <App />
-    </Global>
+    <Suspense fallback='loading...'>
+      <Global>
+        <App />
+      </Global>
+    </Suspense>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -6,7 +6,11 @@
 - Setup Region Card
 - Setup Selected Region Context
 - Setup GA
+- Setup Select Language Modal
 - Setup StateToColorMap
 - Integrate India State Topology API
   https://github.com/deldersveld/topojson/blob/master/countries/india/india-states.json
+- Setup Google Adsense
+  <script data-ad-client={REACT_APP_GOOGLE_ADSENSE_ID} async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 

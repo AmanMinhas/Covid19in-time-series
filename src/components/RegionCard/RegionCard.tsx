@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
+import { useTranslation } from 'react-i18next';
 import { IRegion } from '../../pages/Home/Home';
 import { CaseTypes } from '../TopCases/TopCases';
 import { GlobalContext } from '../../context/Global';
 import { IRegionPlotMetaData } from '../../context/Global/Global';
 import ReactGA from 'react-ga';
 import './RegionCard.scss';
+import { getRegionKey } from '../../utils/regionsMap';
 
 
 interface Props {
@@ -23,6 +25,7 @@ const RegionCard = ({ region }: Props) => {
     addRegionMetadata,
     removeRegionMetadata
   } = useContext(GlobalContext);
+  const { t } = useTranslation();
 
   if (
     !selectedRegionsMetadata ||
@@ -55,10 +58,12 @@ const RegionCard = ({ region }: Props) => {
     }
   }
 
-  const buttonLabel = isSelected ? 'Remove from Graph' : 'Plot on Graph';
+  const buttonLabel = isSelected ? t('removeFromGraph') : t('plotOnGraph');
 
   const renderHeader = () => {
     const { loc } = region;
+    const regionKey = getRegionKey(loc);
+    const regionName = regionKey ? t(`region.${regionKey}`, loc) : loc;
     const bgColorStyle = {};
 
     return (
@@ -66,7 +71,7 @@ const RegionCard = ({ region }: Props) => {
         className={`${className}__header-row`}
         style={bgColorStyle}
       >
-        <p>{loc}</p>
+        <p>{regionName}</p>
         <button onClick={() => handleActionButtonClick()}>
           {buttonLabel}
         </button>
@@ -79,22 +84,22 @@ const RegionCard = ({ region }: Props) => {
     const activeCases = totalConfirmed - discharged - deaths;
     const labelValMap: ILabelValMap[] = [
       {
-        label: 'Total',
+        label: t('shortTotalConfirmedCases'),
         value: totalConfirmed,
         type: 'total-cases'
       },
       {
-        label: 'Active',
+        label: t('shortActiveCases'),
         value: activeCases,
         type: 'active-cases'
       },
       {
-        label: 'Recovered',
+        label: t('recovered'),
         value: discharged,
         type: 'recovered'
       },
       {
-        label: 'Diseased',
+        label: t('shortDeaths'),
         value: deaths,
         type: 'diseased'
       }
