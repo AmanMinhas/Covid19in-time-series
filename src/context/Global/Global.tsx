@@ -92,6 +92,11 @@ const Global = ({ children }: Props) => {
     if (!language) return;
     localStorage.setItem('preferredLanguage', language);
     i18n.changeLanguage(language);
+    ReactGA.event({
+      category: 'Select Language',
+      action: `${language} language selected`,
+      label: language
+    });
   }, [language, i18n]);
 
   return (
