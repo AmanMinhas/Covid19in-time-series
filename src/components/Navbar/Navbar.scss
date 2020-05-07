@@ -2,13 +2,27 @@
 
 .c-Navbar {
   background-color: $primary-button-color;
+  padding: 12px 8px;
+  position: relative;
 
-  p {
+  &__central-content {
     @include fontBase(16px, $font-regular, white);
 
     margin: 0;
     text-align: center;
   }
 
-  padding: 12px 8px;
+  &__language-change-button {
+    @include fontBase(12px, $font-regular, white);
+
+    background-color: lighten($color: $primary-button-color, $amount: 5%);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }

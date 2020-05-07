@@ -77,7 +77,6 @@ const Home = () => {
   const { selectedRegionsMetadata } = useContext(GlobalContext);
   let prevSelectedRegionsCount = usePrevious(selectedRegionsMetadata.length);
 
-
   const className = 'p-Home';
 
   const { latestSummaryData, latestRegionalData, regionOptions } = useMemo(() => getLastDayData(stats), [stats]);
