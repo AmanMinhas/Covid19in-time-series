@@ -11,6 +11,7 @@
     "@types/react-dom": "^16.9.6",
     "@types/react-modal": "^3.10.5",
     "@types/react-scroll": "^1.5.4",
+    "date-fns": "^2.13.0",
     "i18next": "^19.4.4",
     "multiselect-react-dropdown": "^1.4.8",
     "node-sass": "^4.14.0",

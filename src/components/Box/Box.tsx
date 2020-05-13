@@ -3,7 +3,6 @@ import './Box.scss';
 
 interface Props {
   children: ReactNode;
-  // children: any;
 }
 
 const Box = ({ children }: Props) => {
