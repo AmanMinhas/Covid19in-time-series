@@ -7,7 +7,7 @@
 - Setup Selected Region Context
 - Setup GA
 - Setup Select Language Modal
-- Setup StateToColorMap
+- Setup Select State Modal
 - Integrate India State Topology API
   https://github.com/deldersveld/topojson/blob/master/countries/india/india-states.json
 - Setup Google Adsense

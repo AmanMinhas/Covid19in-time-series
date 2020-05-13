@@ -1,8 +1,6 @@
 @import '../../styles/all.scss';
 
 .c-PlotLineChart {
-  padding: 16px 8px;
-
   &__title {
     @include fontBase(16px, $font-regular, black);
 

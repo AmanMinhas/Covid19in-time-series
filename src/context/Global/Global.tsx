@@ -1,8 +1,7 @@
 import React, { useState, useEffect, ReactNode } from 'react';
 import ReactGA from 'react-ga';
-// import { IRegion } from '../../pages/Home/Home';
 import { getUniqueColor } from '../../utils/color';
-import { getRegionKey } from '../../utils/regionsMap';
+import regionsMap, { getRegionKey } from '../../utils/regionsMap';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
@@ -20,6 +19,7 @@ interface IValues {
   selectedRegionsMetadata: IRegionPlotMetaData[];
   addRegionMetadata: (name: string) => void;
   removeRegionMetadata: (name: string) => void;
+  setSelectedRegionsByRegionKeys: (regionKeys: string[]) => void;
   language: string;
   setLanguage: (language: string) => void;
 }
@@ -28,6 +28,7 @@ const initialValues: IValues = {
   selectedRegionsMetadata: [],
   addRegionMetadata: (name: string) => { },
   removeRegionMetadata: (name: string) => { },
+  setSelectedRegionsByRegionKeys: (regionKeys: string[]) => { },
   language: '',
   setLanguage: (language: string) => { },
 };
@@ -68,10 +69,34 @@ const Global = ({ children }: Props) => {
     );
   }
 
+  const setSelectedRegionsByRegionKeys = (regionKeys: string[]) => {
+    let colorsInUse: string[] = [];
+
+    const newSelectedRegionsMetadata = regionKeys.map((regionKey: string) => {
+      const name = regionsMap[regionKey];
+      const dataKey = t(`region.${regionKey}`);
+      const existingEntry = selectedRegionsMetadata.find(
+        (selectedRegionMetadata: IRegionPlotMetaData) => selectedRegionMetadata.regionKey === regionKey
+      );
+      const color = existingEntry ? existingEntry.color : getUniqueColor(colorsInUse);
+      colorsInUse.push(color);
+      const regionMetadata = {
+        name,
+        regionKey,
+        dataKey,
+        color
+      };
+      return regionMetadata;
+    });
+
+    setSelectedRegionsMetadata(newSelectedRegionsMetadata);
+  }
+
   const value = {
     selectedRegionsMetadata,
     addRegionMetadata,
     removeRegionMetadata,
+    setSelectedRegionsByRegionKeys,
     language,
     setLanguage
   }

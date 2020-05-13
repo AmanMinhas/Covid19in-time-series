@@ -5,17 +5,16 @@
     margin-top: 20px;
   }
 
-  /*
-  &__multiselect-container {
-    padding: 8px 16px;
-    
-    .optionListContainer {
-      max-width: 375px;
+  &__line-chart-box-container {
+    padding: 8px;
+
+    &__select-region {
+      display: flex;
+      justify-content: flex-end;
     }
 
-    input {
-      font-size: 16px;
+    .c-PlotLineChart {
+      margin: 8px 0;
     }
   }
-  */
 }

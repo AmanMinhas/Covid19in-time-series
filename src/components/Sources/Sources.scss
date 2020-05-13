@@ -1,0 +1,15 @@
+@import '../../styles/all.scss';
+
+.c-Sources {
+  @include fontBase(10px, $font-regular, black);
+
+  padding: 8px;
+
+  &__title {
+    @include fontBase(16px, $font-regular, black);
+
+    margin: 0;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+}
