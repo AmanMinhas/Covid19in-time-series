@@ -6,8 +6,9 @@ $action-btn-height: 50px;
 .c-SelectRegion {
   &__modal-trigger {
     @include fontBase(12px, $font-regular, white);
-    background-color: $primary-button-color;
 
+    cursor: pointer;
+    background-color: $primary-button-color;
     border-radius: 24px;
     padding: 8px 12px;
   }
