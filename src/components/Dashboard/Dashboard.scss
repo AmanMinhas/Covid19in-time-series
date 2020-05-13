@@ -1,4 +1,17 @@
+@import '../../styles/all.scss';
+
 .c-Dashboard {
+  &__last-updated-container {
+    display: flex;
+    justify-content: flex-end;
+
+    &__p {
+      @include fontBase(10px, $font-regular, $dashboard-data-box-background-color);
+
+      margin: 8px 0;
+    }
+  }
+
   &__sub-box-container {
     display: flex;
     justify-content: space-between;

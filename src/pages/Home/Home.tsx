@@ -32,6 +32,7 @@ export interface IDayData {
 export interface IStats {
   success: boolean;
   data: IDayData[];
+  lastRefreshed: string;
 }
 
 export interface ISelectedStateBase {
@@ -76,6 +77,8 @@ const Home = () => {
   const [selectedStates, setSelectedStates] = useState<ISelectedState[]>([]);
   const { selectedRegionsMetadata } = useContext(GlobalContext);
   let prevSelectedRegionsCount = usePrevious(selectedRegionsMetadata.length);
+
+  const { lastRefreshed } = stats || {};
 
   const className = 'p-Home';
 
@@ -137,6 +140,7 @@ const Home = () => {
     if (!selectedRegionsMetadata.length) return null;
     if (loadingStatesData) return 'Loading...';
     if (errorStatesData) return <p>{errorStatesData}</p>;
+
     return <PlotLineChart
       stats={stats}
       selectedStates={selectedRegionsMetadata}
@@ -153,8 +157,11 @@ const Home = () => {
 
   return (
     <div className={className}>
-      {latestSummaryData && (
-        <Dashboard summary={latestSummaryData} />
+      {latestSummaryData && lastRefreshed && (
+        <Dashboard
+          summary={latestSummaryData}
+          lastRefreshed={lastRefreshed}
+        />
       )}
       {stats && (
         <Box>

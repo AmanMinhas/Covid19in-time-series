@@ -1,10 +1,5 @@
 @import '../../styles/all.scss';
 
-$regionCardWidth: 200px;
-$regionCardPaddingLeft: 8px;
-$regionCardPaddingRight: 40px;
-$regionCardTextContentArea: $regionCardWidth - $regionCardPaddingLeft - $regionCardPaddingRight;
-
 .c-RegionCard {
   box-sizing: border-box;
   border-radius: 5px;

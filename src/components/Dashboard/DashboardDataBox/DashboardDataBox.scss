@@ -1,7 +1,7 @@
 @import '../../../styles/all.scss';
 
 .c-DashboardDataBox {
-  background-color: #201c29;
+  background-color: $dashboard-data-box-background-color;
   border-radius: 5px;
   font-family: $font-regular;
   color: white;

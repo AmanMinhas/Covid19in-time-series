@@ -2,6 +2,7 @@ const localeResources = {
   en: {
     translation: {
       timeSeriesInIndia: 'COVID-19 Time Series in India',
+      lastUpdatedOn: 'Last Updated On',
       totalConfirmedCases: 'Total Confirmed Cases',
       shortTotalConfirmedCases: 'Total',
       activeCases: 'Active Cases',
@@ -55,6 +56,7 @@ const localeResources = {
   hi: {
     translation: {
       timeSeriesInIndia: 'COVID-19 भारत की समय श्रृंखला',
+      lastUpdatedOn: 'आखरी अपडेट',
       totalConfirmedCases: 'कुल मामले',
       shortTotalConfirmedCases: 'कुल',
       activeCases: 'सक्रिय मामले',
