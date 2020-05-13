@@ -39,6 +39,7 @@ $action-btn-height: 50px;
         &__item {
           @include fontBase(14px, $font-regular, $dashboard-data-box-background-color);
 
+          cursor: pointer;
           padding: 12px;
           border-bottom: 1px solid $secondary-button-color;
 
