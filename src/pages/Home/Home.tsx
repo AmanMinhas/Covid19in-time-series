@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useMemo, useContext } from 'react';
-import PlotLineChart from '../../components/PlotLineChart';
-// import { Multiselect } from 'multiselect-react-dropdown';
-import { getUniqueColor } from '../../utils/color';
-import TopCases from '../../components/TopCases';
+import React, { useEffect, useMemo, useContext } from 'react';
+import { useFetch, usePrevious } from '../../utils/customHooks';
+import { GlobalContext } from '../../context/Global';
 import Box from '../../components/Box';
 import Dashboard from '../../components/Dashboard';
-import { GlobalContext } from '../../context/Global';
+import PlotLineChart from '../../components/PlotLineChart';
+import TopCases from '../../components/TopCases';
 import Scroll from 'react-scroll';
-import { useFetch, usePrevious } from '../../utils/customHooks';
+import SelectRegion from '../../components/SelectRegion';
+import Sources from '../../components/Sources';
+import { timeSeriesApiPath } from '../../utils/sources';
 import './Home.scss';
 
 export interface IRegion {
@@ -43,38 +44,28 @@ export interface ISelectedStateBase {
 
 export type ISelectedState = ISelectedStateBase & IRegion;
 
-const getLastDayData = (statesData: IStats) => {
+const getLastDayData = (stats: IStats) => {
   const initial = {
-    latestSummaryData: null,
-    latestRegionalData: [],
-    regionOptions: []
+    latestSummaryData: null
   };
 
-  if (!statesData ||
-    !statesData.success ||
-    !Array.isArray(statesData.data)
+  if (!stats ||
+    !stats.success ||
+    !Array.isArray(stats.data) ||
+    !stats.data.length
   ) return initial;
 
-  const { data } = statesData;
+  const { data } = stats;
 
   const lastDayData = data[data.length - 1];
 
-  const regionOptions = lastDayData
-    .regional
-    .map((region: IRegion) => region.loc)
-    .sort((a: string, b: string) => a.localeCompare(b))
-
   return {
     latestSummaryData: lastDayData.summary,
-    latestRegionalData: lastDayData.regional,
-    regionOptions
   };
 }
 
 const Home = () => {
-  const path: string = 'https://api.rootnet.in/covid19-in/stats/history';
-  const [loadingStatesData, errorStatesData, stats] = useFetch(path);
-  const [selectedStates, setSelectedStates] = useState<ISelectedState[]>([]);
+  const [loadingStatesData, errorStatesData, stats] = useFetch(timeSeriesApiPath.value);
   const { selectedRegionsMetadata } = useContext(GlobalContext);
   let prevSelectedRegionsCount = usePrevious(selectedRegionsMetadata.length);
 
@@ -82,69 +73,19 @@ const Home = () => {
 
   const className = 'p-Home';
 
-  const { latestSummaryData, latestRegionalData, regionOptions } = useMemo(() => getLastDayData(stats), [stats]);
-  const selectedRegionsStr = useMemo(() => {
-    return selectedStates.map((state: ISelectedState) => state.name);
-  }, [selectedStates]);
-
-  const handleAddRegion = (_: any, regionName: string) => {
-    const colorsInUse = selectedStates.map((state: ISelectedState) => state.color);
-    const regionData = latestRegionalData.find((region: IRegion) => region.loc === regionName);
-
-    if (regionData) {
-      const newRegion = {
-        name: regionName,
-        dataKey: regionName,
-        color: getUniqueColor(colorsInUse),
-        ...regionData
-      }
-
-      setSelectedStates([
-        ...selectedStates,
-        newRegion
-      ])
-    }
-  }
-
-  const handleRemoveRegion = (_: any, state: string) => {
-    setSelectedStates(
-      selectedStates.filter((selectedState: ISelectedState) => {
-        return selectedState.name !== state
-      })
-    );
-  }
-
-  /*
-  const renderStateSelectionDropdown = () => {
-    // const selectedValues = selectedStates.map((state: ISelectedState) => state.name);
-    // console.log('selectedValues ', selectedValues);
-
-    return (
-      <div className={`${className}__multiselect-container`}>
-        <Multiselect
-          options={regionOptions}
-          selectedValues={selectedRegionsStr}
-          isObject={false}
-          closeOnSelect={true}
-          avoidHighlightFirstOption={true}
-          placeholder='Select State / UT'
-          onSelect={handleAddRegion}
-          onRemove={handleRemoveRegion}
-        />
-      </div>
-    )
-  }
-  */
+  const { latestSummaryData } = useMemo(() => getLastDayData(stats), [stats]);
 
   const renderPlotLineChart = () => {
     if (!selectedRegionsMetadata.length) return null;
     if (loadingStatesData) return 'Loading...';
     if (errorStatesData) return <p>{errorStatesData}</p>;
 
-    return <PlotLineChart
-      stats={stats}
-      selectedStates={selectedRegionsMetadata}
-    />;
+    return (
+      <PlotLineChart
+        stats={stats}
+        selectedStates={selectedRegionsMetadata}
+      />
+    );
   }
 
   useEffect(() => {
@@ -173,15 +114,20 @@ const Home = () => {
         </Box>
       )}
       <Scroll.Element name={`${className}__line-chart-box`}>
-        {selectedRegionsMetadata.length ? (
-          <Box>
-            {/*renderStateSelectionDropdown()*/}
+        <Box>
+          <div className={`${className}__line-chart-box-container`}>
+            <div className={`${className}__line-chart-box-container__select-region`}>
+              <SelectRegion />
+            </div>
             {renderPlotLineChart()}
-          </Box>
-        ) : null}
+          </div>
+        </Box>
       </Scroll.Element>
       <Box>
         <img src='/images/covid-19-curve-reference.jpg' alt='COVID-19 Curve Reference' width='100%' />
+      </Box>
+      <Box>
+        <Sources />
       </Box>
     </div>
   );

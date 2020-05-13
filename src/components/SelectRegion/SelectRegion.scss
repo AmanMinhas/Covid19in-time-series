@@ -1,0 +1,88 @@
+@import '../../styles/all.scss';
+
+$modal-border-radius: 5px;
+$action-btn-height: 50px;
+
+.c-SelectRegion {
+  &__modal-trigger {
+    @include fontBase(12px, $font-regular, white);
+    background-color: $primary-button-color;
+
+    border-radius: 24px;
+    padding: 8px 12px;
+  }
+
+  &__modal {
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-height: 100vh;
+    justify-content: center;
+
+    &__inner {
+      background-color: white;
+      border-radius: $modal-border-radius;
+      margin: 0 auto;
+      width: 320px;
+      position: relative;
+      max-height: calc(100vh - 120px);
+      
+      &__container {
+        height: calc(100% - #{$action-btn-height});
+        overflow: scroll;
+        padding-bottom: 16px;
+      }
+
+      &__regions-list {
+
+        &__item {
+          @include fontBase(14px, $font-regular, $dashboard-data-box-background-color);
+
+          padding: 12px;
+          border-bottom: 1px solid $secondary-button-color;
+
+          &--selected {
+            background-color: lighten($color: $primary-button-color, $amount: 10%);
+            color: white;
+          }
+        }
+      }
+
+      &__action-btns-col {
+        bottom: 0;
+        position: absolute;
+        height: $action-btn-height;
+        width: 100%;
+        display: flex;
+        
+        &__item {
+          flex: 1;
+          text-align: center;
+          line-height: $action-btn-height;
+          font-family: $font-regular;
+          font-size: 16px;
+
+          &--apply {
+            color: white;
+            background-color: $primary-button-color;
+          }
+
+          &--cancel {
+            color: $dashboard-data-box-background-color;
+            background-color: $secondary-button-color;
+          }
+
+          &:first-child {
+            border-bottom-left-radius: $modal-border-radius;
+          }
+
+          &:last-child {
+            border-bottom-right-radius: $modal-border-radius;
+          }
+        }
+      }
+    }
+
+  }
+}

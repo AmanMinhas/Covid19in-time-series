@@ -3,6 +3,7 @@ import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, Legend, Responsi
 import { IStats, IDayData, IRegion } from '../../pages/Home/Home';
 import './PlotLineChart.scss';
 import { IRegionPlotMetaData } from '../../context/Global/Global';
+import { useTranslation } from 'react-i18next';
 
 interface PlotLineChartProps {
   stats: IStats;
@@ -12,6 +13,7 @@ interface PlotLineChartProps {
 const PlotLineChart = (props: PlotLineChartProps) => {
   const { stats, selectedStates } = props;
   const [lineData, setLineData] = useState<any>([]);
+  const { t } = useTranslation();
   const className = 'c-PlotLineChart';
 
   useEffect(() => {
@@ -60,7 +62,7 @@ const PlotLineChart = (props: PlotLineChartProps) => {
 
   return (
     <div className={className}>
-      <p className={`${className}__title`}>Active Cases Time Series</p>
+      <p className={`${className}__title`}>{t('activeCasesTimeSeries')}</p>
       <ResponsiveContainer
         height={250}
       >

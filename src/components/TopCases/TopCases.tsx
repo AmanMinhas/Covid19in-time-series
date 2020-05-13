@@ -2,6 +2,7 @@ import React from 'react'
 import { IStats, IRegion } from '../../pages/Home/Home';
 import RegionCard from '../RegionCard';
 import './TopCases.scss';
+import { useTranslation } from 'react-i18next';
 
 export type CaseTypes = 'total-cases' | 'active-cases' | 'recovered' | 'diseased';
 
@@ -37,29 +38,9 @@ const getTopCases = (regionalData: IRegion[], type: CaseTypes, topCount: number)
     .splice(0, topCount);
 }
 
-const getTitleByCountAndType = (count: number, type: CaseTypes) => {
-  const prefix = `Top ${count} `;
-  switch (type) {
-    case 'total-cases': {
-      return `${prefix}Total Confirmed Cases`;
-    }
-    case 'active-cases': {
-      return `${prefix}Active Cases`;
-    }
-    case 'recovered': {
-      return `${prefix}Recovered Cases`;
-    }
-    case 'diseased': {
-      return `${prefix}Diseased Cases`;
-    }
-    default: {
-      return '';
-    }
-  }
-}
-
 const TopCases = (props: Props) => {
   const { stats: { data }, type, count } = props;
+  const { t } = useTranslation();
   const className = 'c-TopCases';
 
   if (!count) return null;
@@ -70,6 +51,28 @@ const TopCases = (props: Props) => {
     type,
     count
   );
+
+  const getTitleByCountAndType = (count: number, type: CaseTypes) => {
+    const prefix = `${t('top')} ${count} `;
+    switch (type) {
+      case 'total-cases': {
+        return `${prefix}Total Confirmed Cases`;
+      }
+      case 'active-cases': {
+        return `${prefix}${t('activeCases')}`;
+      }
+      case 'recovered': {
+        return `${prefix}Recovered Cases`;
+      }
+      case 'diseased': {
+        return `${prefix}Diseased Cases`;
+      }
+      default: {
+        return '';
+      }
+    }
+  }
+
 
   const title = getTitleByCountAndType(count, type);
 
