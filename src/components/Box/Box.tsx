@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from 'react';
 import './Box.scss';
 
 interface Props {
@@ -6,11 +6,7 @@ interface Props {
 }
 
 const Box = ({ children }: Props) => {
-  return (
-    <div className='c-Box'>
-      {children}
-    </div>
-  )
-}
+  return <div className="c-Box">{children}</div>;
+};
 
-export default Box
+export default Box;

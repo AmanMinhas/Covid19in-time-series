@@ -13,26 +13,15 @@ const DashboardDataBox = ({ type, title, count, increment }: Props) => {
   const renderIncrement = increment === 0 || increment;
 
   const baseCountClassName = `${className}__count`;
-  const countClassName = [
-    baseCountClassName,
-    type ? ` ${baseCountClassName}--${type}` : ''
-  ].join('');
+  const countClassName = [baseCountClassName, type ? ` ${baseCountClassName}--${type}` : ''].join('');
 
   return (
     <div className={className}>
-      <div className={`${className}__title`}>
-        {title}
-      </div>
-      <div className={countClassName}>
-        {count.toLocaleString()}
-      </div>
-      {renderIncrement && (
-        <div className={`${className}__increment`}>
-          {increment}
-        </div>
-      )}
+      <div className={`${className}__title`}>{title}</div>
+      <div className={countClassName}>{count.toLocaleString()}</div>
+      {renderIncrement && <div className={`${className}__increment`}>{increment}</div>}
     </div>
   );
-}
+};
 
 export default DashboardDataBox;

@@ -12,7 +12,7 @@ interface PlotLineChartProps {
 
 const PlotLineChart = (props: PlotLineChartProps) => {
   const { stats, selectedStates } = props;
-  const [lineData, setLineData] = useState<any>([]);
+  const [lineData, setLineData] = useState<any>(); //eslint-disable-line
   const { t } = useTranslation();
   const className = 'c-PlotLineChart';
 
@@ -22,9 +22,7 @@ const PlotLineChart = (props: PlotLineChartProps) => {
 
       const formattedLineData = data.map((dayData: IDayData) => {
         const { day, summary, regional } = dayData;
-        const shortDay = day
-          .replace('2020-', '')
-          .replace('-', '/');
+        const shortDay = day.replace('2020-', '').replace('-', '/');
 
         let includeCountryData = false;
         let statesData = {};
@@ -38,20 +36,22 @@ const PlotLineChart = (props: PlotLineChartProps) => {
             const { totalConfirmed, discharged, deaths } = details;
             statesData = {
               ...statesData,
-              [state.dataKey]: totalConfirmed - discharged - deaths
+              [state.dataKey]: totalConfirmed - discharged - deaths,
             };
           }
-        })
+        });
 
-        const countryData = includeCountryData ? {
-          India: summary.total - summary.discharged
-        } : {};
+        const countryData = includeCountryData
+          ? {
+              India: summary.total - summary.discharged,
+            }
+          : {};
 
         return {
           day: shortDay,
           ...countryData,
-          ...statesData
-        }
+          ...statesData,
+        };
       });
 
       setLineData(formattedLineData);
@@ -63,33 +63,21 @@ const PlotLineChart = (props: PlotLineChartProps) => {
   return (
     <div className={className}>
       <p className={`${className}__title`}>{t('activeCasesTimeSeries')}</p>
-      <ResponsiveContainer
-        height={250}
-      >
-        <LineChart
-          data={lineData}
-        >
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='day' />
+      <ResponsiveContainer height={250}>
+        <LineChart data={lineData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="day" />
           <YAxis width={40} />
           <Tooltip />
-          <Legend iconType='circle' wrapperStyle={{ bottom: 0, left: 15 }} />
+          <Legend iconType="circle" wrapperStyle={{ bottom: 0, left: 15 }} />
           {selectedStates.map((stateData: IRegionPlotMetaData, key: number) => {
             const { dataKey, color } = stateData;
-            return (
-              <Line
-                key={key}
-                type='monotone'
-                dataKey={dataKey}
-                stroke={color}
-                dot={false}
-              />
-            )
+            return <Line key={key} type="monotone" dataKey={dataKey} stroke={color} dot={false} />;
           })}
         </LineChart>
       </ResponsiveContainer>
     </div>
   );
-}
+};
 
 export default PlotLineChart;

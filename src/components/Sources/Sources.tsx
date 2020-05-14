@@ -15,10 +15,10 @@ const Sources = () => {
           <div key={key}>
             <span>{t(`${label}`)}</span> : {value}
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default Sources
+export default Sources;

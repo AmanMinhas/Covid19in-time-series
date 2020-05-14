@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Modal from 'react-modal';
 import './SelectLanguageModal.scss';
 
@@ -17,12 +17,12 @@ interface IProps {
 const languages: ILanguage[] = [
   {
     key: 'en',
-    label: 'English'
+    label: 'English',
   },
   {
     key: 'hi',
-    label: 'हिन्दी'
-  }
+    label: 'हिन्दी',
+  },
 ];
 
 const SelectLanguageModal = (props: IProps) => {
@@ -46,18 +46,12 @@ const SelectLanguageModal = (props: IProps) => {
             const selected = selectedLanguage === language.key;
             const labelClassName = [
               `${className}__language-label`,
-              selected ? ` ${className}__language-label--selected` : ''
+              selected ? ` ${className}__language-label--selected` : '',
             ].join('');
 
             return (
-              <div
-                key={key}
-                className={`${className}__language-row`}
-                onClick={() => handleSetLanguage(language.key)}
-              >
-                <p className={labelClassName}>
-                  {language.label}
-                </p>
+              <div key={key} className={`${className}__language-row`} onClick={() => handleSetLanguage(language.key)}>
+                <p className={labelClassName}>{language.label}</p>
               </div>
             );
           })}
@@ -65,6 +59,6 @@ const SelectLanguageModal = (props: IProps) => {
       </Modal>
     </div>
   );
-}
+};
 
 export default SelectLanguageModal;

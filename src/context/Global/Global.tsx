@@ -5,7 +5,7 @@ import regionsMap, { getRegionKey } from '../../utils/regionsMap';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export interface IRegionPlotMetaData {
@@ -26,11 +26,11 @@ interface IValues {
 
 const initialValues: IValues = {
   selectedRegionsMetadata: [],
-  addRegionMetadata: (name: string) => { },
-  removeRegionMetadata: (name: string) => { },
-  setSelectedRegionsByRegionKeys: (regionKeys: string[]) => { },
+  addRegionMetadata: (name: string) => {}, // eslint-disable-line
+  removeRegionMetadata: (name: string) => {}, // eslint-disable-line
+  setSelectedRegionsByRegionKeys: (regionKeys: string[]) => {}, // eslint-disable-line
   language: '',
-  setLanguage: (language: string) => { },
+  setLanguage: (language: string) => {}, // eslint-disable-line
 };
 
 export const GlobalContext = React.createContext(initialValues);
@@ -52,25 +52,22 @@ const Global = ({ children }: Props) => {
       name,
       regionKey,
       dataKey,
-      color: getUniqueColor(colorsInUse)
+      color: getUniqueColor(colorsInUse),
     };
 
-    setSelectedRegionsMetadata([
-      ...selectedRegionsMetadata,
-      newRegionMetadata
-    ]);
-  }
+    setSelectedRegionsMetadata([...selectedRegionsMetadata, newRegionMetadata]);
+  };
 
   const removeRegionMetadata = (name: string) => {
     setSelectedRegionsMetadata(
       selectedRegionsMetadata.filter((regionMetadata: IRegionPlotMetaData) => {
-        return regionMetadata.name !== name
+        return regionMetadata.name !== name;
       })
     );
-  }
+  };
 
   const setSelectedRegionsByRegionKeys = (regionKeys: string[]) => {
-    let colorsInUse: string[] = [];
+    const colorsInUse: string[] = [];
 
     const newSelectedRegionsMetadata = regionKeys.map((regionKey: string) => {
       const name = regionsMap[regionKey];
@@ -84,13 +81,13 @@ const Global = ({ children }: Props) => {
         name,
         regionKey,
         dataKey,
-        color
+        color,
       };
       return regionMetadata;
     });
 
     setSelectedRegionsMetadata(newSelectedRegionsMetadata);
-  }
+  };
 
   const value = {
     selectedRegionsMetadata,
@@ -98,8 +95,8 @@ const Global = ({ children }: Props) => {
     removeRegionMetadata,
     setSelectedRegionsByRegionKeys,
     language,
-    setLanguage
-  }
+    setLanguage,
+  };
 
   useEffect(() => {
     const gaTrackingId = process.env.REACT_APP_GA_TRACKING_ID;
@@ -120,15 +117,11 @@ const Global = ({ children }: Props) => {
     ReactGA.event({
       category: 'Select Language',
       action: `${language} language selected`,
-      label: language
+      label: language,
     });
   }, [language, i18n]);
 
-  return (
-    <GlobalContext.Provider value={value}>
-      {children}
-    </GlobalContext.Provider>
-  );
-}
+  return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>;
+};
 
 export default Global;

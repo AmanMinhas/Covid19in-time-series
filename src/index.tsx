@@ -9,7 +9,7 @@ import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Suspense fallback='loading...'>
+    <Suspense fallback="loading...">
       <Global>
         <App />
       </Global>

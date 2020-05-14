@@ -46,14 +46,10 @@ export type ISelectedState = ISelectedStateBase & IRegion;
 
 const getLastDayData = (stats: IStats) => {
   const initial = {
-    latestSummaryData: null
+    latestSummaryData: null,
   };
 
-  if (!stats ||
-    !stats.success ||
-    !Array.isArray(stats.data) ||
-    !stats.data.length
-  ) return initial;
+  if (!stats || !stats.success || !Array.isArray(stats.data) || !stats.data.length) return initial;
 
   const { data } = stats;
 
@@ -62,12 +58,12 @@ const getLastDayData = (stats: IStats) => {
   return {
     latestSummaryData: lastDayData.summary,
   };
-}
+};
 
 const Home = () => {
   const [loadingStatesData, errorStatesData, stats] = useFetch(timeSeriesApiPath.value);
   const { selectedRegionsMetadata } = useContext(GlobalContext);
-  let prevSelectedRegionsCount = usePrevious(selectedRegionsMetadata.length);
+  const prevSelectedRegionsCount = usePrevious(selectedRegionsMetadata.length);
 
   const { lastRefreshed } = stats || {};
 
@@ -80,37 +76,23 @@ const Home = () => {
     if (loadingStatesData) return 'Loading...';
     if (errorStatesData) return <p>{errorStatesData}</p>;
 
-    return (
-      <PlotLineChart
-        stats={stats}
-        selectedStates={selectedRegionsMetadata}
-      />
-    );
-  }
+    return <PlotLineChart stats={stats} selectedStates={selectedRegionsMetadata} />;
+  };
 
   useEffect(() => {
     if ((prevSelectedRegionsCount || 0) < selectedRegionsMetadata.length) {
       Scroll.scroller.scrollTo(`${className}__line-chart-box`, {
-        smooth: true
+        smooth: true,
       });
     }
   }, [prevSelectedRegionsCount, selectedRegionsMetadata]);
 
   return (
     <div className={className}>
-      {latestSummaryData && lastRefreshed && (
-        <Dashboard
-          summary={latestSummaryData}
-          lastRefreshed={lastRefreshed}
-        />
-      )}
+      {latestSummaryData && lastRefreshed && <Dashboard summary={latestSummaryData} lastRefreshed={lastRefreshed} />}
       {stats && (
         <Box>
-          <TopCases
-            type='active-cases'
-            count={10}
-            stats={stats}
-          />
+          <TopCases type="active-cases" count={10} stats={stats} />
         </Box>
       )}
       <Scroll.Element name={`${className}__line-chart-box`}>
@@ -124,13 +106,13 @@ const Home = () => {
         </Box>
       </Scroll.Element>
       <Box>
-        <img src='/images/covid-19-curve-reference.jpg' alt='COVID-19 Curve Reference' width='100%' />
+        <img src="/images/covid-19-curve-reference.jpg" alt="COVID-19 Curve Reference" width="100%" />
       </Box>
       <Box>
         <Sources />
       </Box>
     </div>
   );
-}
+};
 
 export default Home;
