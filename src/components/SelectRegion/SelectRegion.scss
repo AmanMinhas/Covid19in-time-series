@@ -27,7 +27,8 @@ $action-btn-height: 50px;
       margin: 0 auto;
       width: 320px;
       position: relative;
-      max-height: calc(100vh - 120px);
+      height: calc(100vh - 250px);;
+      max-height: calc(100vh - 250px);
       
       &__container {
         height: calc(100% - #{$action-btn-height});
@@ -60,6 +61,7 @@ $action-btn-height: 50px;
         
         &__item {
           flex: 1;
+          cursor: pointer;
           text-align: center;
           line-height: $action-btn-height;
           font-family: $font-regular;

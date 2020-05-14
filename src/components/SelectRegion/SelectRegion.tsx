@@ -85,7 +85,7 @@ const SelectRegion = () => {
         isOpen={showModal}
         className={modalClassName}
         onRequestClose={handleCloseModal}
-        shouldCloseOnOverlayClick={false}
+        shouldCloseOnOverlayClick={true}
       >
         <div className={`${modalClassName}__inner`}>
           <div className={`${modalClassName}__inner__container`}>
