@@ -31,6 +31,7 @@ const Navbar = () => {
         isOpen={isLanguageSelectorOpen}
         selectedLanguage={language}
         handleSetLanguage={handleSetLanguage}
+        handleClose={() => setIsLanguageSelectorOpen(false)}
       />
     </div>
   )

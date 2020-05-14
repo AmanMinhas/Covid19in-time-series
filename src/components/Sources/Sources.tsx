@@ -12,7 +12,7 @@ const Sources = () => {
       <p className={`${className}__title`}>{t('sources')}</p>
       {sources.map(({ label, value }: ISource, key: number) => {
         return (
-          <div>
+          <div key={key}>
             <span>{t(`${label}`)}</span> : {value}
           </div>
         )

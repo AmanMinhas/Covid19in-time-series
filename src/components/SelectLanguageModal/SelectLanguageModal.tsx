@@ -11,6 +11,7 @@ interface IProps {
   isOpen: boolean;
   selectedLanguage: string;
   handleSetLanguage: (language: string) => void;
+  handleClose: () => void;
 }
 
 const languages: ILanguage[] = [
@@ -25,7 +26,7 @@ const languages: ILanguage[] = [
 ];
 
 const SelectLanguageModal = (props: IProps) => {
-  const { isOpen, selectedLanguage, handleSetLanguage } = props;
+  const { isOpen, selectedLanguage, handleSetLanguage, handleClose } = props;
   const className = 'c-SelectLanguageModal';
 
   const appElement = document.getElementById('root');
@@ -37,6 +38,8 @@ const SelectLanguageModal = (props: IProps) => {
         isOpen={isOpen}
         appElement={appElement}
         className={className}
+        onRequestClose={handleClose}
+        shouldCloseOnOverlayClick={true}
       >
         <div className={`${className}__container`}>
           {languages.map((language: ILanguage, key: number) => {
