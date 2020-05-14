@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 import Modal from 'react-modal';
-import { GlobalContext } from '../../context/Global'
+import { GlobalContext } from '../../context/Global';
 import { useTranslation } from 'react-i18next';
 import { IRegionPlotMetaData } from '../../context/Global/Global';
 import regionsMap from '../../utils/regionsMap';
@@ -8,10 +8,7 @@ import ReactGA from 'react-ga';
 import './SelectRegion.scss';
 
 const SelectRegion = () => {
-  const {
-    selectedRegionsMetadata,
-    setSelectedRegionsByRegionKeys
-  } = useContext(GlobalContext);
+  const { selectedRegionsMetadata, setSelectedRegionsByRegionKeys } = useContext(GlobalContext);
 
   const [showModal, setShowModal] = useState(false);
   const [selectedRegionKeys, setSelectedRegionKeys] = useState<string[]>([]);
@@ -29,21 +26,16 @@ const SelectRegion = () => {
       (regionMetadata: IRegionPlotMetaData) => regionMetadata.regionKey
     );
     setSelectedRegionKeys(selectedRegionKeys);
-  }
+  };
 
   const handleRegionClick = (regionKey: string) => {
     if (selectedRegionKeys.includes(regionKey)) {
-      const updatedKeys = selectedRegionKeys.filter(
-        (selectedRegionKey: string) => selectedRegionKey !== regionKey
-      );
+      const updatedKeys = selectedRegionKeys.filter((selectedRegionKey: string) => selectedRegionKey !== regionKey);
       setSelectedRegionKeys(updatedKeys);
     } else {
-      setSelectedRegionKeys([
-        ...selectedRegionKeys,
-        regionKey
-      ]);
+      setSelectedRegionKeys([...selectedRegionKeys, regionKey]);
     }
-  }
+  };
 
   const handleApplyClick = () => {
     setSelectedRegionsByRegionKeys(selectedRegionKeys);
@@ -53,15 +45,15 @@ const SelectRegion = () => {
       ReactGA.event({
         category: 'Plot on Graph',
         action: 'User selected location from SelectRegion modal',
-        label: regionsMap[regionKey]
+        label: regionsMap[regionKey],
       });
-    })
-  }
+    });
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
     resetSelectedRegions();
-  }
+  };
 
   useEffect(() => {
     const selectedRegionKeys = selectedRegionsMetadata.map(
@@ -74,10 +66,7 @@ const SelectRegion = () => {
 
   return (
     <div className={className}>
-      <div
-        className={`${className}__modal-trigger`}
-        onClick={() => setShowModal(true)}
-      >
+      <div className={`${className}__modal-trigger`} onClick={() => setShowModal(true)}>
         {t('selectStates')}
       </div>
       <Modal
@@ -93,18 +82,15 @@ const SelectRegion = () => {
               {regionKeys.map((regionKey, key) => {
                 const itemClassName = [
                   `${modalClassName}__inner__regions-list__item`,
-                  selectedRegionKeys.includes(regionKey) ? ` ${modalClassName}__inner__regions-list__item--selected` : ''
+                  selectedRegionKeys.includes(regionKey)
+                    ? ` ${modalClassName}__inner__regions-list__item--selected`
+                    : '',
                 ].join('');
                 return (
-                  <div
-                    key={key}
-                    className={itemClassName}
-                    onClickCapture={() => handleRegionClick(regionKey)}
-                  >
-
+                  <div key={key} className={itemClassName} onClickCapture={() => handleRegionClick(regionKey)}>
                     {t(`region.${regionKey}`)}
                   </div>
-                )
+                );
               })}
             </div>
           </div>
@@ -112,7 +98,7 @@ const SelectRegion = () => {
             <div
               className={[
                 `${modalClassName}__inner__action-btns-col__item`,
-                `${modalClassName}__inner__action-btns-col__item--apply`
+                `${modalClassName}__inner__action-btns-col__item--apply`,
               ].join(' ')}
               onClick={handleApplyClick}
             >
@@ -121,7 +107,7 @@ const SelectRegion = () => {
             <div
               className={[
                 `${modalClassName}__inner__action-btns-col__item`,
-                `${modalClassName}__inner__action-btns-col__item--cancel`
+                `${modalClassName}__inner__action-btns-col__item--cancel`,
               ].join(' ')}
               onClick={handleCloseModal}
             >
@@ -131,7 +117,7 @@ const SelectRegion = () => {
         </div>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default SelectRegion
+export default SelectRegion;

@@ -5,9 +5,7 @@ export interface ISource {
 
 export const timeSeriesApiPath = {
   label: 'timeSeriesApi',
-  value: 'https://api.rootnet.in/covid19-in/stats/history'
+  value: 'https://api.rootnet.in/covid19-in/stats/history',
 };
 
-export const sources = [
-  timeSeriesApiPath
-];
+export const sources = [timeSeriesApiPath];

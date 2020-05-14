@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from '../../pages/Home'
+import Home from '../../pages/Home';
 import Navbar from '../Navbar';
 import './App.scss';
 
@@ -14,6 +14,6 @@ const App = () => {
       </div>
     </div>
   );
-}
+};
 
 export default App;

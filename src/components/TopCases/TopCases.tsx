@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { IStats, IRegion } from '../../pages/Home/Home';
 import RegionCard from '../RegionCard';
 import './TopCases.scss';
@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 export type CaseTypes = 'total-cases' | 'active-cases' | 'recovered' | 'diseased';
 
 interface Props {
-  stats: IStats
+  stats: IStats;
   type: CaseTypes;
   count: number;
 }
@@ -36,21 +36,21 @@ const getTopCases = (regionalData: IRegion[], type: CaseTypes, topCount: number)
       }
     })
     .splice(0, topCount);
-}
+};
 
 const TopCases = (props: Props) => {
-  const { stats: { data }, type, count } = props;
+  const {
+    stats: { data },
+    type,
+    count,
+  } = props;
   const { t } = useTranslation();
   const className = 'c-TopCases';
 
   if (!count) return null;
 
   const lastDayData = data[data.length - 1];
-  const topCases = getTopCases(
-    [...lastDayData.regional],
-    type,
-    count
-  );
+  const topCases = getTopCases([...lastDayData.regional], type, count);
 
   const getTitleByCountAndType = (count: number, type: CaseTypes) => {
     const prefix = `${t('top')} ${count} `;
@@ -71,8 +71,7 @@ const TopCases = (props: Props) => {
         return '';
       }
     }
-  }
-
+  };
 
   const title = getTitleByCountAndType(count, type);
 
@@ -81,13 +80,11 @@ const TopCases = (props: Props) => {
       <p className={`${className}__title`}>{title}</p>
       <div>
         {topCases.map((region: IRegion, key: number) => {
-          return (
-            <RegionCard key={key} region={region} />
-          )
+          return <RegionCard key={key} region={region} />;
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TopCases
+export default TopCases;
