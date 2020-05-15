@@ -7,7 +7,6 @@ export const useFetch = (path: string) => {
 
   const fetchData = async () => {
     try {
-      // const path = 'https://api.rootnet.in/covid19-in/stats/history';
       const res = await fetch(path);
       console.log('res ', res);
       const data = await res.json();
@@ -21,7 +20,7 @@ export const useFetch = (path: string) => {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchData(); // eslint-disable-line
   }, []);
   return [loading, error, data];
 };
