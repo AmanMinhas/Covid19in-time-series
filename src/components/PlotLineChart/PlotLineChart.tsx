@@ -12,7 +12,7 @@ interface PlotLineChartProps {
 
 const PlotLineChart = (props: PlotLineChartProps) => {
   const { stats, selectedStates } = props;
-  const [lineData, setLineData] = useState<any>(); //eslint-disable-line
+  const [lineData, setLineData] = useState<any>([]); //eslint-disable-line
   const { t } = useTranslation();
   const className = 'c-PlotLineChart';
 
