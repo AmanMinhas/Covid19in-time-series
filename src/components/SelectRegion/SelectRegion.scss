@@ -4,13 +4,23 @@ $modal-border-radius: 5px;
 $action-btn-height: 50px;
 
 .c-SelectRegion {
-  &__modal-trigger {
+  &__btn {
     @include fontBase(12px, $font-regular, white);
 
     cursor: pointer;
-    background-color: $primary-button-color;
+    background-color: $secondary-button-color;
     border-radius: 24px;
+    display: inline-block;
     padding: 8px 12px;
+  }
+
+  &__clear-btn {
+    color: $dashboard-data-box-background-color;
+    margin-left: 10px;
+  }
+
+  &__modal-trigger {
+    background-color: $primary-button-color;
   }
 
   &__modal {
@@ -27,9 +37,9 @@ $action-btn-height: 50px;
       margin: 0 auto;
       width: 320px;
       position: relative;
-      height: calc(100vh - 250px);;
+      height: calc(100vh - 250px);
       max-height: calc(100vh - 250px);
-      
+
       &__container {
         height: calc(100% - #{$action-btn-height});
         overflow: scroll;
@@ -37,7 +47,6 @@ $action-btn-height: 50px;
       }
 
       &__regions-list {
-
         &__item {
           @include fontBase(14px, $font-regular, $dashboard-data-box-background-color);
 
@@ -58,7 +67,7 @@ $action-btn-height: 50px;
         height: $action-btn-height;
         width: 100%;
         display: flex;
-        
+
         &__item {
           flex: 1;
           cursor: pointer;
@@ -87,6 +96,5 @@ $action-btn-height: 50px;
         }
       }
     }
-
   }
 }

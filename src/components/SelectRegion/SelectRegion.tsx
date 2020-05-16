@@ -8,7 +8,7 @@ import ReactGA from 'react-ga';
 import './SelectRegion.scss';
 
 const SelectRegion = () => {
-  const { selectedRegionsMetadata, setSelectedRegionsByRegionKeys } = useContext(GlobalContext);
+  const { selectedRegionsMetadata, setSelectedRegionsByRegionKeys, resetRegions } = useContext(GlobalContext);
 
   const [showModal, setShowModal] = useState(false);
   const [selectedRegionKeys, setSelectedRegionKeys] = useState<string[]>([]);
@@ -66,9 +66,14 @@ const SelectRegion = () => {
 
   return (
     <div className={className}>
-      <div className={`${className}__modal-trigger`} onClick={() => setShowModal(true)}>
+      <div className={`${className}__btn ${className}__modal-trigger`} onClick={() => setShowModal(true)}>
         {t('selectStates')}
       </div>
+      {selectedRegionsMetadata.length > 0 ? (
+        <div className={`${className}__btn ${className}__clear-btn`} onClick={resetRegions}>
+          {t('clear')}
+        </div>
+      ) : null}
       <Modal
         appElement={appElement}
         isOpen={showModal}

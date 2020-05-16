@@ -19,6 +19,7 @@ const localeResources = {
       activeCasesTimeSeries: 'Active Cases Time Series',
       sources: 'Source',
       timeSeriesApi: 'Time Series API',
+      clear: 'Clear',
       region: {
         AN: 'Andaman and Nicobar Islands',
         AP: 'Andhra Pradesh',
@@ -80,6 +81,7 @@ const localeResources = {
       activeCasesTimeSeries: 'सक्रिय मामलो की समय श्रृंखला',
       sources: 'स्रोत',
       timeSeriesApi: 'समय श्रृंखला API',
+      clear: 'सभी हटाएं',
       region: {
         AN: 'अंडमान और निकोबार द्वीप समूह',
         AP: 'आंध्र प्रदेश',

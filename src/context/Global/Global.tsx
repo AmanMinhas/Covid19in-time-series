@@ -20,6 +20,7 @@ interface IValues {
   addRegionMetadata: (name: string) => void;
   removeRegionMetadata: (name: string) => void;
   setSelectedRegionsByRegionKeys: (regionKeys: string[]) => void;
+  resetRegions: () => void;
   language: string;
   setLanguage: (language: string) => void;
 }
@@ -29,6 +30,7 @@ const initialValues: IValues = {
   addRegionMetadata: (name: string) => {}, // eslint-disable-line
   removeRegionMetadata: (name: string) => {}, // eslint-disable-line
   setSelectedRegionsByRegionKeys: (regionKeys: string[]) => {}, // eslint-disable-line
+  resetRegions: () => {}, // eslint-disable-line
   language: '',
   setLanguage: (language: string) => {}, // eslint-disable-line
 };
@@ -89,11 +91,20 @@ const Global = ({ children }: Props) => {
     setSelectedRegionsMetadata(newSelectedRegionsMetadata);
   };
 
+  const resetRegions = () => {
+    setSelectedRegionsMetadata([]);
+    ReactGA.event({
+      category: 'Clear All Regions',
+      action: 'User clicked clear',
+    });
+  };
+
   const value = {
     selectedRegionsMetadata,
     addRegionMetadata,
     removeRegionMetadata,
     setSelectedRegionsByRegionKeys,
+    resetRegions,
     language,
     setLanguage,
   };
