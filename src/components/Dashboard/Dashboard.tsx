@@ -20,8 +20,6 @@ const Dashboard = ({ summary, lastRefreshed }: Props) => {
   const { total, discharged, deaths } = summary;
   const className = 'c-Dashboard';
 
-  console.log('summary, lastRefreshed ', summary, lastRefreshed);
-
   const { language } = i18n;
   const isEnglish = language === 'en';
   const lastRefreshedDate = new Date(lastRefreshed);
