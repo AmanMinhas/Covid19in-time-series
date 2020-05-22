@@ -73,23 +73,25 @@ const Global = ({ children }: Props) => {
   const setSelectedRegionsByRegionKeys = (regionKeys: string[]) => {
     const colorsInUse: string[] = [];
 
-    const newSelectedRegionsMetadata = regionKeys.map((regionKey: string) => {
-      const name = regionsMap[regionKey];
-      const dataKey = t(`region.${regionKey}`);
-      const existingEntry = selectedRegionsMetadata.find(
-        (selectedRegionMetadata: IRegionPlotMetaData) => selectedRegionMetadata.regionKey === regionKey
-      );
-      const color = existingEntry ? existingEntry.color : getUniqueColor(colorsInUse);
-      if (!color) return;
-      colorsInUse.push(color);
-      const regionMetadata = {
-        name,
-        regionKey,
-        dataKey,
-        color,
-      };
-      return regionMetadata;
-    });
+    const newSelectedRegionsMetadata = regionKeys
+      .map((regionKey: string) => {
+        const name = regionsMap[regionKey];
+        const dataKey = t(`region.${regionKey}`);
+        const existingEntry = selectedRegionsMetadata.find(
+          (selectedRegionMetadata: IRegionPlotMetaData) => selectedRegionMetadata.regionKey === regionKey
+        );
+        const color = existingEntry ? existingEntry.color : getUniqueColor(colorsInUse);
+        if (!color) return null;
+        colorsInUse.push(color);
+        const regionMetadata: IRegionPlotMetaData = {
+          name,
+          regionKey,
+          dataKey,
+          color,
+        };
+        return regionMetadata;
+      })
+      .filter((metaData: IRegionPlotMetaData | null) => !!metaData) as IRegionPlotMetaData[];
 
     setSelectedRegionsMetadata(newSelectedRegionsMetadata);
   };
