@@ -10,6 +10,7 @@
 - Setup Select State Modal
 - Setup eslint
 - Dockerize application
+- Add Clear Option
 - Integrate India State Topology API
   https://github.com/deldersveld/topojson/blob/master/countries/india/india-states.json
 - Setup Google Adsense

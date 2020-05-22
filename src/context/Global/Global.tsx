@@ -50,11 +50,13 @@ const Global = ({ children }: Props) => {
     if (!regionKey) return;
 
     const dataKey = t(`region.${regionKey}`);
+    const color = getUniqueColor(colorsInUse);
+    if (!color) return;
     const newRegionMetadata = {
       name,
       regionKey,
       dataKey,
-      color: getUniqueColor(colorsInUse),
+      color,
     };
 
     setSelectedRegionsMetadata([...selectedRegionsMetadata, newRegionMetadata]);
@@ -78,6 +80,7 @@ const Global = ({ children }: Props) => {
         (selectedRegionMetadata: IRegionPlotMetaData) => selectedRegionMetadata.regionKey === regionKey
       );
       const color = existingEntry ? existingEntry.color : getUniqueColor(colorsInUse);
+      if (!color) return;
       colorsInUse.push(color);
       const regionMetadata = {
         name,
