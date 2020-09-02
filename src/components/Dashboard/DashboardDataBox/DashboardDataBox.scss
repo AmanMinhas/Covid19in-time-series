@@ -2,7 +2,6 @@
 
 .c-DashboardDataBox {
   background-color: $dashboard-data-box-background-color;
-  border-radius: 5px;
   font-family: $font-regular;
   color: white;
 
@@ -10,7 +9,7 @@
     font-size: 12px;
     padding: 8px;
   }
-  
+
   &__count {
     font-size: 18px;
     text-align: right;
@@ -19,15 +18,15 @@
     &--total-cases {
       color: $total-case-count-color;
     }
-  
+
     &--active-cases {
       color: $active-case-count-color;
     }
-  
+
     &--recovered {
       color: $recovered-count-color;
     }
-  
+
     &--diseased {
       color: $diseased-count-color;
     }

@@ -4,6 +4,8 @@
   @include fontBase(10px, $font-regular, black);
 
   padding: 8px;
+  position: relative;
+  overflow: hidden;
 
   &__title {
     @include fontBase(16px, $font-regular, black);
@@ -11,5 +13,21 @@
     margin: 0;
     margin-bottom: 8px;
     text-align: center;
+  }
+
+  &__row {
+    margin: 10px 0;
+  }
+
+  &::after {
+    content: ' ';
+    background: url('/literature-96.png');
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    right: -30px;
+    bottom: -20px;
+    transform: rotate(-37deg);
+    opacity: 0.5;
   }
 }

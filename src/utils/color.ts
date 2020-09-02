@@ -1,7 +1,7 @@
 export const colorSet = [
   '#ff1a66',
   '#ffa500',
-  '#ffff00',
+  '#9a9a08',
   '#00e680',
   '#00b3e6',
   '#6666ff',

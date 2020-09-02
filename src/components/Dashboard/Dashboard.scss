@@ -6,9 +6,33 @@
     justify-content: flex-end;
 
     &__p {
-      @include fontBase(10px, $font-regular, $dashboard-data-box-background-color);
+      @include fontBase(10px, $font-regular, #fff);
 
       margin: 8px 0;
+    }
+  }
+
+  &__confirmed-cases-container {
+    position: relative;
+    overflow: hidden;
+
+    &::before,
+    &::after {
+      content: ' ';
+      background: url('/covid-icon-80.png');
+      position: absolute;
+      height: 80px;
+      width: 80px;
+    }
+
+    &::before {
+      top: -50px;
+      right: -30px;
+    }
+
+    &::after {
+      bottom: -40px;
+      left: -10px;
     }
   }
 

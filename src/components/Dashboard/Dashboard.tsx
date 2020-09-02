@@ -42,7 +42,9 @@ const Dashboard = ({ summary, lastRefreshed }: Props) => {
           {t('lastUpdatedOn')} : <strong>{formattedLastRefreshedDate}</strong>
         </p>
       </div>
-      <DashboardDataBox type="total-cases" title={t('totalConfirmedCases')} count={totalCases} />
+      <div className={`${className}__confirmed-cases-container`}>
+        <DashboardDataBox type="total-cases" title={t('totalConfirmedCases')} count={totalCases} />
+      </div>
       <div className={`${className}__sub-box-container`}>
         <DashboardDataBox type="active-cases" title={t('activeCases')} count={activeCasesCount} />
         <DashboardDataBox type="recovered" title={t('recovered')} count={recoveredCount} />

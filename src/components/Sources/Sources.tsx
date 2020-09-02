@@ -12,11 +12,31 @@ const Sources = () => {
       <p className={`${className}__title`}>{t('sources')}</p>
       {sources.map(({ label, value }: ISource, key: number) => {
         return (
-          <div key={key}>
-            <span>{t(`${label}`)}</span> : {value}
+          <div key={key} className={`${className}__row`}>
+            <a rel="noopener noreferrer" target="_blank" href={value}>
+              {t(`${label}`)}
+            </a>
           </div>
         );
       })}
+      <div className={`${className}__row`}>
+        <a rel="noopener noreferrer" target="_blank" href="https://icons8.com/icons/set/coronavirus">
+          Coronavirus icon
+        </a>{' '}
+        icon by{' '}
+        <a rel="noopener noreferrer" target="_blank" href="https://icons8.com">
+          Icons8
+        </a>
+      </div>
+      <div className={`${className}__row`}>
+        <a rel="noopener noreferrer" target="_blank" href="https://icons8.com/icons/set/literature">
+          Literature icon
+        </a>{' '}
+        icon by{' '}
+        <a rel="noopener noreferrer" target="_blank" href="https://icons8.com">
+          Icons8
+        </a>
+      </div>
     </div>
   );
 };

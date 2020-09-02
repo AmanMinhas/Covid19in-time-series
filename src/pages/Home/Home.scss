@@ -5,6 +5,12 @@
     margin-top: 20px;
   }
 
+  &__top-cases-container {
+    .c-Box {
+      background: black;
+    }
+  }
+
   &__line-chart-box-container {
     padding: 8px;
 

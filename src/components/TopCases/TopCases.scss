@@ -4,11 +4,12 @@
   padding: 8px;
 
   &__title {
-    @include fontBase(16px, $font-regular, black);
+    @include fontBase(16px, $font-regular, white);
 
     margin: 0;
     margin-bottom: 8px;
     text-align: center;
+    text-shadow: -2px 2px $primary-button-color;
   }
 
   .c-RegionCard {

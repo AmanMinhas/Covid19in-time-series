@@ -2,32 +2,38 @@
 
 .c-RegionCard {
   box-sizing: border-box;
-  border-radius: 5px;
   background-color: #201c29;
 
   &__header-row {
     @include fontBase(12px, $font-regular, white);
 
-    padding: 8px;
     border-bottom: 1px solid white;
+    display: flex;
+    justify-content: space-between;
 
     p {
       margin: 0;
       display: inline;
     }
 
-    button {
-      @include fontBase(8px, $font-regular, white);
+    &__region-name-container {
+      padding: 8px;
+    }
 
-      background: $primary-button-color;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      float: right;
-      font-family: "Roboto";
-      padding: 3px 8px 2px;
-      outline: none;
-      text-transform: uppercase;
+    &__btn-container {
+      button {
+        @include fontBase(8px, $font-regular, white);
+
+        height: 100%;
+        padding: 8px 12px;
+        background: $primary-button-color;
+        border: none;
+        cursor: pointer;
+        float: right;
+        font-family: 'Roboto';
+        outline: none;
+        text-transform: uppercase;
+      }
     }
   }
 
@@ -46,7 +52,7 @@
   &__box-label {
     font-size: 8px;
   }
-  
+
   &__box-count-value {
     font-size: 12px;
     margin-top: 4px;
@@ -54,15 +60,15 @@
     &--total-cases {
       color: $total-case-count-color;
     }
-  
+
     &--active-cases {
       color: $active-case-count-color;
     }
-  
+
     &--recovered {
       color: $recovered-count-color;
     }
-  
+
     &--diseased {
       color: $diseased-count-color;
     }

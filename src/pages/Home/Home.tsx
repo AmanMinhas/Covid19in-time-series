@@ -91,9 +91,11 @@ const Home = () => {
     <div className={className}>
       {latestSummaryData && lastRefreshed && <Dashboard summary={latestSummaryData} lastRefreshed={lastRefreshed} />}
       {stats && (
-        <Box>
-          <TopCases type="active-cases" count={10} stats={stats} />
-        </Box>
+        <div className={`${className}__top-cases-container`}>
+          <Box>
+            <TopCases type="active-cases" count={10} stats={stats} />
+          </Box>
+        </div>
       )}
       <Scroll.Element name={`${className}__line-chart-box`}>
         <Box>

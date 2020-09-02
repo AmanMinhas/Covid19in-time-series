@@ -59,8 +59,12 @@ const RegionCard = ({ region }: Props) => {
 
     return (
       <div className={`${className}__header-row`} style={bgColorStyle}>
-        <p>{regionName}</p>
-        <button onClick={() => handleActionButtonClick()}>{buttonLabel}</button>
+        <div className={`${className}__header-row__region-name-container`}>
+          <p>{regionName}</p>
+        </div>
+        <div className={`${className}__header-row__btn-container`}>
+          <button onClick={() => handleActionButtonClick()}>{buttonLabel}</button>
+        </div>
       </div>
     );
   };
