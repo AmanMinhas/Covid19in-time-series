@@ -37,6 +37,16 @@ const Sources = () => {
           Icons8
         </a>
       </div>
+      <div className={`${className}__row`}>
+        <a
+          className={`${className}__row__linkedin-contact`}
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://www.linkedin.com/in/aman-minhas-16186b72/"
+        >
+          {t('builtByName')}
+        </a>
+      </div>
     </div>
   );
 };

@@ -59,6 +59,7 @@ const localeResources = {
         UK: 'Uttarakhand',
         WB: 'West Bengal',
       },
+      builtByName: 'Built by Aman Minhas',
     },
   },
   hi: {
@@ -121,6 +122,7 @@ const localeResources = {
         UK: 'उत्तराखंड',
         WB: 'पश्चिम बंगाल',
       },
+      builtByName: 'अमन मिन्हास द्वारा निर्मित',
     },
   },
 };

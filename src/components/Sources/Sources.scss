@@ -22,6 +22,24 @@
       color: rgb(0, 75, 145);
       text-decoration: none;
     }
+
+    &__linkedin-contact {
+      color: $primary-button-color;
+
+      &::before {
+        content: ' ';
+        background: url('/linkedin-sm.png');
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        margin-right: 3px;
+      }
+    }
+
+    &::last-child {
+      // Contact Row
+      margin-top: 30px;
+    }
   }
 
   &::after {
