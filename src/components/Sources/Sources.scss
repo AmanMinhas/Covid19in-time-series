@@ -17,6 +17,11 @@
 
   &__row {
     margin: 10px 0;
+
+    a {
+      color: rgb(0, 75, 145);
+      text-decoration: none;
+    }
   }
 
   &::after {
