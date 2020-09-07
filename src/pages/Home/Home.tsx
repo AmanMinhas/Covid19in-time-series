@@ -3,7 +3,6 @@ import { useFetch, usePrevious } from '../../utils/customHooks';
 import { GlobalContext } from '../../context/Global';
 import Box from '../../components/Box';
 import GenericLoader from '../../components/GenericLoader';
-import TopCases from '../../components/TopCases';
 import Scroll from 'react-scroll';
 import SelectRegion from '../../components/SelectRegion';
 import Sources from '../../components/Sources';
@@ -13,6 +12,7 @@ import { WebpIsSupported } from '../../utils/helpers';
 
 const Dashboard = lazy(() => import('../../components/Dashboard'));
 const PlotLineChart = lazy(() => import('../../components/PlotLineChart'));
+const TopCases = lazy(() => import('../../components/TopCases'));
 
 export interface IRegion {
   loc: string;
@@ -114,11 +114,13 @@ const Home = () => {
         </Suspense>
       )}
       {stats && (
-        <div className={`${className}__top-cases-container`}>
-          <Box>
-            <TopCases type="active-cases" count={10} stats={stats} />
-          </Box>
-        </div>
+        <Suspense fallback={<GenericLoader />}>
+          <div className={`${className}__top-cases-container`}>
+            <Box>
+              <TopCases type="active-cases" count={10} stats={stats} />
+            </Box>
+          </div>
+        </Suspense>
       )}
       <Scroll.Element name={`${className}__line-chart-box`}>
         <Box>
