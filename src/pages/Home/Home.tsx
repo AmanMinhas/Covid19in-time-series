@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo, useContext, Suspense, lazy } from 
 import { useFetch, usePrevious } from '../../utils/customHooks';
 import { GlobalContext } from '../../context/Global';
 import Box from '../../components/Box';
-import Dashboard from '../../components/Dashboard';
 import GenericLoader from '../../components/GenericLoader';
 import TopCases from '../../components/TopCases';
 import Scroll from 'react-scroll';
@@ -12,6 +11,7 @@ import { timeSeriesApiPath } from '../../utils/sources';
 import './Home.scss';
 import { WebpIsSupported } from '../../utils/helpers';
 
+const Dashboard = lazy(() => import('../../components/Dashboard'));
 const PlotLineChart = lazy(() => import('../../components/PlotLineChart'));
 
 export interface IRegion {
@@ -108,7 +108,11 @@ const Home = () => {
   return (
     <div className={className}>
       {loadingStatesData ? <GenericLoader /> : null}
-      {latestSummaryData && lastRefreshed && <Dashboard summary={latestSummaryData} lastRefreshed={lastRefreshed} />}
+      {latestSummaryData && lastRefreshed && (
+        <Suspense fallback={<GenericLoader />}>
+          <Dashboard summary={latestSummaryData} lastRefreshed={lastRefreshed} />
+        </Suspense>
+      )}
       {stats && (
         <div className={`${className}__top-cases-container`}>
           <Box>
@@ -127,9 +131,11 @@ const Home = () => {
         </Box>
       </Scroll.Element>
       <Box>
-        {covidCurveImgSrc ? (
-          <img src={covidCurveImgSrc} loading="lazy" alt="COVID-19 Curve Reference" width="100%" />
-        ) : null}
+        <div className={`${className}__covid-curve-img-container`}>
+          {covidCurveImgSrc ? (
+            <img src={covidCurveImgSrc} loading="lazy" alt="COVID-19 Curve Reference" width="100%" />
+          ) : null}
+        </div>
       </Box>
       <Box>
         <Sources />
