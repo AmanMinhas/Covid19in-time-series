@@ -5,23 +5,23 @@ export const useFetch = (path: string) => {
   const [error, setError] = useState('');
   const [data, setData] = useState<null | any>(null); // eslint-disable-line
 
-  const fetchData = async () => {
-    try {
-      const res = await fetch(path);
-      console.log('res ', res);
-      const data = await res.json();
-      console.log('data ', data);
-      setData(data);
-      setLoading(false);
-    } catch (e) {
-      setError(e.message);
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(path);
+        console.log('res ', res);
+        const data = await res.json();
+        console.log('data ', data);
+        setData(data);
+        setLoading(false);
+      } catch (e) {
+        setError(e.message);
+        setLoading(false);
+      }
+    };
+
     fetchData(); // eslint-disable-line
-  }, []);
+  }, [path]);
   return [loading, error, data];
 };
 

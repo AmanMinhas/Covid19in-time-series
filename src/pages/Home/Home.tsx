@@ -1,15 +1,18 @@
-import React, { useEffect, useMemo, useContext } from 'react';
+import React, { useState, useEffect, useMemo, useContext, Suspense, lazy } from 'react';
 import { useFetch, usePrevious } from '../../utils/customHooks';
 import { GlobalContext } from '../../context/Global';
 import Box from '../../components/Box';
 import Dashboard from '../../components/Dashboard';
-import PlotLineChart from '../../components/PlotLineChart';
+import GenericLoader from '../../components/GenericLoader';
 import TopCases from '../../components/TopCases';
 import Scroll from 'react-scroll';
 import SelectRegion from '../../components/SelectRegion';
 import Sources from '../../components/Sources';
 import { timeSeriesApiPath } from '../../utils/sources';
 import './Home.scss';
+import { WebpIsSupported } from '../../utils/helpers';
+
+const PlotLineChart = lazy(() => import('../../components/PlotLineChart'));
 
 export interface IRegion {
   loc: string;
@@ -64,6 +67,7 @@ const Home = () => {
   const [loadingStatesData, errorStatesData, stats] = useFetch(timeSeriesApiPath.value);
   const { selectedRegionsMetadata } = useContext(GlobalContext);
   const prevSelectedRegionsCount = usePrevious(selectedRegionsMetadata.length);
+  const [covidCurveImgSrc, setCovidCurveImgSrc] = useState('');
 
   const { lastRefreshed } = stats || {};
 
@@ -73,10 +77,14 @@ const Home = () => {
 
   const renderPlotLineChart = () => {
     if (!selectedRegionsMetadata.length) return null;
-    if (loadingStatesData) return 'Loading...';
+    if (loadingStatesData) return <GenericLoader />;
     if (errorStatesData) return <p>{errorStatesData}</p>;
 
-    return <PlotLineChart stats={stats} selectedStates={selectedRegionsMetadata} />;
+    return (
+      <Suspense fallback={<GenericLoader />}>
+        <PlotLineChart stats={stats} selectedStates={selectedRegionsMetadata} />
+      </Suspense>
+    );
   };
 
   useEffect(() => {
@@ -87,8 +95,19 @@ const Home = () => {
     }
   }, [prevSelectedRegionsCount, selectedRegionsMetadata]);
 
+  useEffect(() => {
+    (async () => {
+      if (await WebpIsSupported()) {
+        setCovidCurveImgSrc('/images/covid-19-curve-reference.webp');
+      } else {
+        setCovidCurveImgSrc('/images/covid-19-curve-reference.jpg');
+      }
+    })();
+  }, []);
+
   return (
     <div className={className}>
+      {loadingStatesData ? <GenericLoader /> : null}
       {latestSummaryData && lastRefreshed && <Dashboard summary={latestSummaryData} lastRefreshed={lastRefreshed} />}
       {stats && (
         <div className={`${className}__top-cases-container`}>
@@ -108,7 +127,9 @@ const Home = () => {
         </Box>
       </Scroll.Element>
       <Box>
-        <img src="/images/covid-19-curve-reference.jpg" alt="COVID-19 Curve Reference" width="100%" />
+        {covidCurveImgSrc ? (
+          <img src={covidCurveImgSrc} loading="lazy" alt="COVID-19 Curve Reference" width="100%" />
+        ) : null}
       </Box>
       <Box>
         <Sources />
