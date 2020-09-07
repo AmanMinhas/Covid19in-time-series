@@ -116,7 +116,7 @@ const Home = () => {
       {stats && (
         <div className={`${className}__top-cases-container`}>
           <Box>
-            <Suspense fallback={() => null}>
+            <Suspense fallback={null}>
               <TopCases type="active-cases" count={10} stats={stats} />
             </Suspense>
           </Box>

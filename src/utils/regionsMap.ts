@@ -35,7 +35,7 @@ const regionsMap: StringMap = {
   RJ: 'Rajasthan',
   SK: 'Sikkim',
   TN: 'Tamil Nadu',
-  TS: 'Telangana',
+  TS: 'Telengana',
   TR: 'Tripura',
   UP: 'Uttar Pradesh',
   UK: 'Uttarakhand',
