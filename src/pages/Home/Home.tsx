@@ -114,13 +114,13 @@ const Home = () => {
         </Suspense>
       )}
       {stats && (
-        <Suspense fallback={<GenericLoader />}>
-          <div className={`${className}__top-cases-container`}>
-            <Box>
+        <div className={`${className}__top-cases-container`}>
+          <Box>
+            <Suspense fallback={() => null}>
               <TopCases type="active-cases" count={10} stats={stats} />
-            </Box>
-          </div>
-        </Suspense>
+            </Suspense>
+          </Box>
+        </div>
       )}
       <Scroll.Element name={`${className}__line-chart-box`}>
         <Box>
